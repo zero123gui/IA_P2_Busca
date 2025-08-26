@@ -1,29 +1,12 @@
-#include <stdio.h>
-
-typedef struct node
-{
-    int num;
-    int custo_chegar;
-    int custo_heuristica;
-    int custo_total = custo_heuristica + custo_chegar;
-    node *parent;
-}node;
-
-typedef struct aberta
-{
-    aberta *prox;
-    
-}aberta;
-
-typedef struct fechada
-{
-    /* data */
-}fechada;
-
-
-
+#include <iostream>
+#include "Node.h"
 
 int main(){
+    auto start_node = std::make_shared<Node>("ao", 0, 10, nullptr);
+
+    std::cout << "Projeto de Algoritmos de Busca" << std::endl;
+    std::cout << "Nó inicial criado: " << start_node->id << std::endl;
+    std::cout << "Custo Total: " << start_node->f_cost << std::endl;
 
     return 0;
 }
