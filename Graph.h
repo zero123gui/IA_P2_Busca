@@ -49,6 +49,8 @@ public:
     // Retorna o nó final
     string getEndNodeId() const;
 
+    // Retorna o conteúdo de uma string do arquivo 
+    string getContent(const string& line);
 };
 
 #endif //GRAPH_H
