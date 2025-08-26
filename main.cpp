@@ -1,8 +1,6 @@
 #include <iostream>
 #include "Node.h"
 
-using namespace std;
-
 int main(){
     auto start_node = make_shared<Node>("a0", 0, 10, nullptr);
 
