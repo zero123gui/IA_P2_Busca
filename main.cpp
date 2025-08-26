@@ -1,12 +1,14 @@
 #include <iostream>
 #include "Node.h"
 
-int main(){
-    auto start_node = std::make_shared<Node>("ao", 0, 10, nullptr);
+using namespace std;
 
-    std::cout << "Projeto de Algoritmos de Busca" << std::endl;
-    std::cout << "Nó inicial criado: " << start_node->id << std::endl;
-    std::cout << "Custo Total: " << start_node->f_cost << std::endl;
+int main(){
+    auto start_node = make_shared<Node>("a0", 0, 10, nullptr);
+
+    cout << "Projeto de Algoritmos de Busca" << endl;
+    cout << "No inicial criado: " << start_node->id << endl;
+    cout << "Custo Total: " << start_node->f_cost << endl;
 
     return 0;
 }
