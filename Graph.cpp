@@ -89,7 +89,7 @@ bool Graph::loadFromFile(const string& filename){
 
     file.close();
     cout << "Grafo carregado com sucesso" << endl;
-    cout << "Ponto inicial: " << this->start_node_id << "Ponto final: " << this->end_node_id <<endl;
+    cout << "Ponto inicial: " << this->start_node_id << "\nPonto final: " << this->end_node_id <<endl;
 
     return true;
 }
