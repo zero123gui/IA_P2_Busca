@@ -41,7 +41,7 @@ const vector<pair<string, int>>& Graph::getNeighbors(const string& node) const{
 bool Graph::loadFromFile(const string& filename){
     ifstream file(filename);
     if(!file.is_open()){
-        cerr << "Esse erro é sacanagem, abertura de arquivo n da"<< filename << endl;
+        cerr << "Nao carregou o nome certo"<< filename << endl;
         return false;
     }
     string line;
