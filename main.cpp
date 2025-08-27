@@ -6,12 +6,12 @@
 void menu(){
     int option = 0;
     string file;
-    cout << "\t--- Bem vindo ao Labirinto ---" << endl;
+    cout << "\n\t--- Bem vindo ao Labirinto ---" << endl;
 
     do
     {
         // Menu de opções
-        cout << "\nEscolha umas das opcoes abaixo para chegar no centro" <<endl;
+        cout << "Escolha umas das opcoes abaixo para chegar no centro" <<endl;
         cout << "\tOp 1: Algoritmo A*" << endl;
         cout << "\tOp 2: Algoritmo Guloso" << endl;
         cout << "\tOp 3: Sair do Labirinto" << endl;
@@ -27,6 +27,7 @@ void menu(){
         Graph labirinto;
         bool sucesso = labirinto.loadFromFile(file);
 
+        // Verifica se carregou o arquivo corretamente
         if(sucesso)
             cout << "Carregou certinho" << endl;
         else
