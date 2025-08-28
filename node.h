@@ -15,7 +15,9 @@ struct Node {
 
     shared_ptr<Node> parent; //ponteiro pro no pai
 
-    //construtor pq o bglh é tipo java mas n é java
+    // Construtor do nó
+    // Entrada: id do nó, custo para chegar g, heurística h, ponteiro para o pai
+    // Saída: nó preenchido
     Node(string id, int g, int h, shared_ptr<Node> p = nullptr)
         : id(id), g_cost(g), h_cost(h), f_cost(g+h), parent(p) {}
     

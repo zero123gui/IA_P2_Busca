@@ -6,6 +6,8 @@
 
 
 // Adiciona uma aresta/nó no grafo
+// Entrada: id de um nó, id de um nó, custo para ir, orientado ou não
+// Saída: aresta adiciona entre um par de nós
 void Graph::addEdge(const string& from, const string& to, int cost, bool is_oriented){
     // Adiciona a conexão
     adj[from].push_back({to, cost});
@@ -17,11 +19,15 @@ void Graph::addEdge(const string& from, const string& to, int cost, bool is_orie
 }
 
 // Define o valor da heurística de um nó
+// Entrada: nó do grafo, valor da heuristica
+// Saída: heurística associada ao nó
 void Graph::setHeuristic(const string& node, int value){
     heuristics[node] = value;
 }
 
 // Retorna o valor da heurística de um nó
+// Entrada: nó do grafo
+// Saída: valor da heurística de um nó
 int Graph::getHeuristic(const string& node) const{
     // Verifica se tem heurística pro nó, senão retorna 0
     if(heuristics.count(node)){
@@ -32,12 +38,16 @@ int Graph::getHeuristic(const string& node) const{
 }
 
 // Retorna uma lista de vizinhos de um nó
+// Entrada: nó do grafo
+// Saída: vetor que contém nome e valor dos nós adjacentes
 const vector<pair<string, int>>& Graph::getNeighbors(const string& node) const{
     // Se o nó não existir retorna uma exceção
     return adj.at(node);
 }
 
 // Carrega o grafo a partir de um arquivo texto
+// Entrada: nome do arquivo
+// Saída: boleano que diz se deu certo ou não
 bool Graph::loadFromFile(const string& filename){
     ifstream file(filename);
     if(!file.is_open()){
@@ -95,16 +105,22 @@ bool Graph::loadFromFile(const string& filename){
 }
 
 // Retorna o nó inicial
+// Entrada: -------
+// Saída: nó inicial do grafo
 string Graph::getStartNodeId() const{
     return start_node_id;
 }
 
 // Retorna o nó final
+// Entrada: -------
+// Saída: nó final do grafo
 string Graph::getEndNodeId() const{
     return end_node_id;
 }
 
 // Retorna o conteúdo de uma string do arquivo 
+// Entrada: linha do arquivo
+// Saída: retorna o conteúdo dessa linha
 string Graph::getContent(const string& line){
     size_t start = line.find('(');
     size_t end = line.rfind(')');
