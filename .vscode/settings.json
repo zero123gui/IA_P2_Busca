@@ -3,6 +3,8 @@
         "vector": "cpp",
         "xstring": "cpp",
         "unordered_map": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "memory": "cpp",
+        "stdexcept": "cpp"
     }
 }
