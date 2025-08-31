@@ -1,58 +1,77 @@
 // main.cpp
 #include <iostream>
 #include <locale>
-#include "Graph.h" // Inclui a definição da nossa classe Graph
+#include "Graph.h"
+#include "AStar.h"
 
-void menu(){
+void menu() {
     int option = 0;
     string file;
     Graph labirinto;
+
     cout << "\n\t--- Bem vindo ao Labirinto ---" << endl;
 
-    do
-    {
+    do {
         // Menu de opções
-        cout << "Escolha umas das opcoes abaixo para chegar no centro" <<endl;
+        cout << "\nEscolha uma das opcoes para prosseguir" << endl;
         cout << "\tOp 1: Algoritmo A*" << endl;
-        cout << "\tOp 2: Algoritmo Guloso" << endl;
+        cout << "\tOp 2: Algoritmo Guloso (em breve)" << endl;
         cout << "\tOp 3: Sair do Labirinto" << endl;
+        cout << "Opcao: ";
         cin >> option;
 
-        // Se digitou 3 então sai do programa
-        if (option == 3)
+        if (option == 3) {
+            cout << "Saindo do labirinto..." << endl;
             break;
-        // Se digitou algo diferente de 1 ou 2 então opção inválida
+        }
+        
         if (option != 1 && option != 2) {
             cout << "Opcao invalida, tente novamente." << endl;
             continue; // Volta para o início do loop
         }
 
         // Recebe o nome do arquivo
-        cout << "Para continuar, digite o nome do arquivo (ex: teste.txt)" << endl;
+        cout << "Digite o nome do arquivo (ex: teste.txt): ";
         cin >> file;
 
-        // Inicializa o labirinto com o arquivo recebido
+        // Carrega o labirinto com o arquivo recebido
         bool sucesso = labirinto.loadFromFile(file);
-        if(!sucesso)
-            cerr << "Nao foi possivel carregar o labirinto. Verifique o nome do arquivo." << endl;
+
+        if (!sucesso) {
+            cerr << "arquivo n abriu certo" << endl;
             continue;
-        
-            // Switch-case para execução dos Algoritmos
-        switch (option)
-        {
-        case 1:
-            cout << "Voce escolheu o Algoritmo A*" << endl;
-            cout << "Pena que ainda ta em desenvolvimento" << endl;
-            break;
-        case 2:
-            cout << "Voce escolheu o Algoritmo Guloso" << endl;
-            cout << "Pena que ainda ta em desenvolvimento" << endl;
-            break;
-        default:
-            cout << "Saindo do labirinto" << endl;
-            break;
         }
-    } while (option!=3);
+
+        switch (option) {
+            case 1: {
+                cout << "\n--- Executando Algoritmo A* ---" << endl;
+                AStar astar_solver;
+
+                vector<string> path = astar_solver.solve(
+                    labirinto,
+                    labirinto.getStartNodeId(),
+                    labirinto.getEndNodeId()
+                );
+
+                if (path.empty()) {
+                    cout << "Nao achei o caminho f ):" << endl;
+                } else {
+                    cout << "\n--- Resumo da Execucao ---" << endl;
+                    cout << "Nro de passos " << path.size() - 1 << endl;
+                    cout << "Caminho: ";
+                    for (size_t i = 0; i < path.size(); ++i) {
+                        cout << path[i] << (i == path.size() - 1 ? "" : " -> ");
+                    }
+                    cout << endl;
+                }
+                break;
+            }
+            case 2:
+                cout << "Voce escolheu o Algoritmo Guloso" << endl;
+                cout << "Pena que ainda ta em desenvolvimento" << endl;
+                break;
+        }
+    } while (option != 3);
 }
 
 int main() {

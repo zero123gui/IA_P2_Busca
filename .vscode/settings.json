@@ -5,6 +5,7 @@
         "unordered_map": "cpp",
         "iostream": "cpp",
         "memory": "cpp",
-        "stdexcept": "cpp"
+        "stdexcept": "cpp",
+        "ostream": "cpp"
     }
 }

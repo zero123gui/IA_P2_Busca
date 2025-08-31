@@ -29,6 +29,7 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
     while (!frontier.empty()){
         shared_ptr<Node> current_node = frontier.front();
         frontier.pop_front();
+        cout << "No atual: " << current_node->id << endl;
 
         // Achou o fim
         if(current_node->id == endId){
@@ -56,6 +57,8 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 
                 int h_cost = graph.getHeuristic(neighbor_id);
                 auto neighbor_node = make_shared<Node>(neighbor_id, new_g_cost, h_cost, current_node);
+
+                cout << "(" << neighbor_node->id << ": " << neighbor_node->g_cost << " + " << neighbor_node->h_cost << " = " << neighbor_node->f_cost << ")" << endl;
 
                 insertSorted(frontier, neighbor_node);
             }
