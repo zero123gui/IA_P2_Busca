@@ -1,8 +1,9 @@
 // main.cpp
 #include <iostream>
 #include <locale>
-#include "Graph.h"
 #include "AStar.h"
+#include "Graph.h"
+#include "Greedy.h"
 
 void menu() {
     int option = 0;
@@ -66,9 +67,30 @@ void menu() {
                 }
                 break;
             }
-            case 2:
-                cout << "Voce escolheu o Algoritmo Guloso" << endl;
-                cout << "Pena que ainda ta em desenvolvimento" << endl;
+            case 2:{
+                cout << "\n--- Executando Algoritmo Guloso ---" << endl;
+                Greedy greedy_solver;
+
+                vector<string> path = greedy_solver.solve(
+                    labirinto,
+                    labirinto.getStartNodeId(),
+                    labirinto.getEndNodeId()
+                );
+
+                if (path.empty()) {
+                    cout << "Nao achei o caminho f ):" << endl;
+                } else {
+                    cout << "\n--- Resumo da Execucao ---" << endl;
+                    cout << "Nro de passos " << path.size() - 1 << endl;
+                    cout << "Caminho: ";
+                    for (size_t i = 0; i < path.size(); ++i) {
+                        cout << path[i] << (i == path.size() - 1 ? "" : " -> ");
+                    }
+                    cout << endl;
+                }
+                break;
+            }
+            default:
                 break;
         }
     } while (option != 3);

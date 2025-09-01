@@ -1,4 +1,4 @@
-#include "AStar.h"
+#include "Greedy.h"
 #include <list>
 #include <unordered_set>
 #include <iostream>
@@ -7,7 +7,7 @@
 // Função que insere um nó na fronteira a ser explorada
 // Entrada: ponteiro pra fronteira, nó a ser inserido
 // Saída: nó inserido na fronteira ordenada
-void insertSortedAStar(list<shared_ptr<Node>>& frontier, shared_ptr<Node> newNode){
+void insertSortedGreedy(list<shared_ptr<Node>>& frontier, shared_ptr<Node> newNode){
     auto no = frontier.begin();
     while(no != frontier.end() && (*no)->f_cost < newNode->f_cost){
         no++;
@@ -18,12 +18,13 @@ void insertSortedAStar(list<shared_ptr<Node>>& frontier, shared_ptr<Node> newNod
 // Função que realiza a busca
 // Entrada: Grafo, Id nó inicial, Id nó final
 // Saída: Vetor contendo o caminho
-vector<string> AStar::solve(const Graph& graph, const string& startId, const string& endId){
+vector<string> Greedy::solve(const Graph& graph, const string& startId, const string& endId){
     list<shared_ptr<Node>> frontier; // lista encadeada ordenada que contém os nós a serem explorados
     unordered_set<string> visited_nodes; // nós explorados
 
     // Primeiro nó a ser explorado
     auto start_node = make_shared<Node>(startId, 0, graph.getHeuristic(startId), nullptr);
+    start_node->f_cost = start_node->h_cost;
     frontier.push_back(start_node);
 
     while (!frontier.empty()){
@@ -57,10 +58,11 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 
                 int h_cost = graph.getHeuristic(neighbor_id);
                 auto neighbor_node = make_shared<Node>(neighbor_id, new_g_cost, h_cost, current_node);
+                neighbor_node->f_cost = neighbor_node->h_cost;
 
                 cout << "(" << neighbor_node->id << ": " << neighbor_node->g_cost << " + " << neighbor_node->h_cost << " = " << neighbor_node->f_cost << ")" << endl;
 
-                insertSortedAStar(frontier, neighbor_node);
+                insertSortedGreedy(frontier, neighbor_node);
             }
             
         } catch(const out_of_range e){
@@ -74,7 +76,7 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 // Função que reconstroi o caminho percorrido
 // Entrada: nó final
 // Saída: Vetor contendo o caminho percorrido
-vector<string> AStar::reconstructPath(shared_ptr<Node> endNode){
+vector<string> Greedy::reconstructPath(shared_ptr<Node> endNode){
     vector<string> path;
     shared_ptr<Node> currentNode = endNode;
 

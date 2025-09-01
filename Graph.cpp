@@ -4,6 +4,16 @@
 #include <sstream> //parse de string
 
 
+// Limpa os valores do grafo
+// Entrada: nenhuma
+// Saída: nenhuma
+void Graph::clear() {
+    adj.clear();
+    heuristics.clear();
+    start_node_id = "";
+    end_node_id = "";
+    is_oriented = false;
+}
 
 // Adiciona uma aresta/nó no grafo
 // Entrada: id de um nó, id de um nó, custo para ir, orientado ou não
@@ -49,6 +59,8 @@ const vector<pair<string, int>>& Graph::getNeighbors(const string& node) const{
 // Entrada: nome do arquivo
 // Saída: boleano que diz se deu certo ou não
 bool Graph::loadFromFile(const string& filename){
+    clear();
+    
     ifstream file(filename);
     if(!file.is_open()){
         cerr << "Nao carregou o nome certo"<< filename << endl;

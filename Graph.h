@@ -28,6 +28,11 @@ private:
     bool is_oriented = false;
 
 public:
+    // Limpa os valores do grafo
+    // Entrada: nenhuma
+    // Saída: nenhuma
+    void clear();
+
     // Adiciona uma aresta/nó no grafo
     // Entrada: id de um nó, id de um nó, custo para ir, orientado ou não
     // Saída: aresta adiciona entre um par de nós
