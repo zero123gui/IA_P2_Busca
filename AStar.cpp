@@ -19,6 +19,7 @@ void insertSortedAStar(list<shared_ptr<Node>>& frontier, shared_ptr<Node> newNod
 // Entrada: Grafo, Id nó inicial, Id nó final
 // Saída: Vetor contendo o caminho
 vector<string> AStar::solve(const Graph& graph, const string& startId, const string& endId){
+    int iteracao = 1;
     list<shared_ptr<Node>> frontier; // lista encadeada ordenada que contém os nós a serem explorados
     unordered_set<string> visited_nodes; // nós explorados
 
@@ -33,7 +34,7 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 
         // Achou o fim
         if(current_node->id == endId){
-            cout << "Cheguei no final";
+            cout << "Cheguei no final" << endl;
             return reconstructPath(current_node);
         }
         
@@ -57,14 +58,21 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 
                 int h_cost = graph.getHeuristic(neighbor_id);
                 auto neighbor_node = make_shared<Node>(neighbor_id, new_g_cost, h_cost, current_node);
-
-                cout << "(" << neighbor_node->id << ": " << neighbor_node->g_cost << " + " << neighbor_node->h_cost << " = " << neighbor_node->f_cost << ")" << endl;
-
                 insertSortedAStar(frontier, neighbor_node);
             }
             
         } catch(const out_of_range e){
         }
+        
+        cout << "Iteracao: " << iteracao << endl;
+        cout << "Lista: ";
+        for (const auto& node : frontier) {
+            cout << "(" << node->id << ": " << node->g_cost << " + " << node->h_cost << " = " << node->f_cost << ") ";
+        }
+        cout << endl;
+        cout << "Medida de desempenho: " << endl;
+        cout << endl;
+        iteracao++;  
     }
 
     cout << "Deu ruim ein, ve se ta certo isso ai" << endl;
@@ -77,13 +85,16 @@ vector<string> AStar::solve(const Graph& graph, const string& startId, const str
 vector<string> AStar::reconstructPath(shared_ptr<Node> endNode){
     vector<string> path;
     shared_ptr<Node> currentNode = endNode;
+    int total_cost=0;
 
     // preenche o caminho de trás pra frente
-    while (currentNode->parent != nullptr){
+    while (currentNode != nullptr){
+        total_cost += currentNode->g_cost;
         path.push_back(currentNode->id);
         currentNode = currentNode->parent;
     }
-
+    cout << "\n--- Resumo da Execucao ---" << endl;
+    cout << "Custo total do caminho percorrido: " << total_cost << endl;
     // inverte o vetor para ficar em ordem
     reverse(path.begin(), path.end());
 

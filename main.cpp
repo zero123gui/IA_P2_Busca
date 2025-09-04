@@ -57,8 +57,6 @@ void menu() {
                 if (path.empty()) {
                     cout << "Nao achei o caminho f ):" << endl;
                 } else {
-                    cout << "\n--- Resumo da Execucao ---" << endl;
-                    cout << "Nro de passos " << path.size() - 1 << endl;
                     cout << "Caminho: ";
                     for (size_t i = 0; i < path.size(); ++i) {
                         cout << path[i] << (i == path.size() - 1 ? "" : " -> ");
@@ -78,10 +76,8 @@ void menu() {
                 );
 
                 if (path.empty()) {
-                    cout << "Nao achei o caminho f ):" << endl;
+                    cout << "Nao achei o caminho" << endl;
                 } else {
-                    cout << "\n--- Resumo da Execucao ---" << endl;
-                    cout << "Nro de passos " << path.size() - 1 << endl;
                     cout << "Caminho: ";
                     for (size_t i = 0; i < path.size(); ++i) {
                         cout << path[i] << (i == path.size() - 1 ? "" : " -> ");

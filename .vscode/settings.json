@@ -6,6 +6,9 @@
         "iostream": "cpp",
         "memory": "cpp",
         "stdexcept": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "list": "cpp",
+        "xutility": "cpp",
+        "unordered_set": "cpp"
     }
 }
